@@ -1,30 +1,39 @@
 Summary:	A Flickr photo uploader
+Summary(pl.UTF-8):	Narzędzie do umieszczania zdjęć na Flickr
 Name:		postr
 Version:	0.8
 Release:	1
-License:	GPL v2
-Group:		Applications
+License:	GPL v2+
+Group:		X11/Applications
 Source0:	http://burtonini.com/computing/%{name}-%{version}.tar.gz
 # Source0-md5:	131f746d00dad31c2634ab14184dc4fb
 URL:		http://burtonini.com/blog/computers/postr
+BuildRequires:	rpm-pythonprov
 %pyrequires_eq	python-libs
 Requires:	python-gnome-extras-egg
-Requires:	python-pygtk-gtk
+Requires:	python-pygtk-gtk >= 2:2.0
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 postr is a Flickr uploader.
 
+%description -l pl.UTF-8
+postr to narzędzie do umieszczania zdjęć na serwisie Flickr.
+
 %package -n nautilus-extension-postr
 Summary:	Postr extension for Nautilus
+Summary(pl.UTF-8):	Rozszerzenie postr dla Nautilusa
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
 Requires:	nautilus >= 2.16.1
 Requires:	nautilus-python
 
 %description -n nautilus-extension-postr
-Allows to send files from Nautilus.
+Allows to send files to Flickr from Nautilus.
+
+%description -n nautilus-extension-postr -l pl.UTF-8
+To rozszerzenie pozwala wysyłać pliki na serwis Flickr z Nautilusa.
 
 %prep
 %setup -q
