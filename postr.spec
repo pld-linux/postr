@@ -1,12 +1,12 @@
 Summary:	A Flickr photo uploader
 Summary(pl.UTF-8):	Narzędzie do umieszczania zdjęć na Flickr
 Name:		postr
-Version:	0.10
-Release:	3
+Version:	0.12.1
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://burtonini.com/computing/%{name}-%{version}.tar.gz
-# Source0-md5:	1e65e52606d81a5e40b1edf58b7aec60
+# Source0-md5:	fc21ece89fb8fd58d0406e4c301047f3
 URL:		http://burtonini.com/blog/computers/postr
 BuildRequires:	rpm-pythonprov
 %pyrequires_eq	python-libs
@@ -64,10 +64,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS README TODO
 %attr(755,root,root) %{_bindir}/postr
+%{py_sitescriptdir}/Postr-%{version}-py*.egg-info
 %{py_sitescriptdir}/postr
 %{_desktopdir}/postr.desktop
 %{_iconsdir}/hicolor/*/apps/*
 
 %files -n nautilus-extension-postr
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/nautilus/extensions-1.0/python/*
+%attr(755,root,root) %{_libdir}/nautilus/extensions-2.0/python/*
