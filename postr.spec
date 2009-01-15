@@ -1,12 +1,12 @@
 Summary:	A Flickr photo uploader
 Summary(pl.UTF-8):	Narzędzie do umieszczania zdjęć na Flickr
 Name:		postr
-Version:	0.12.1
-Release:	2
+Version:	0.12.3
+Release:	1
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://burtonini.com/computing/%{name}-%{version}.tar.gz
-# Source0-md5:	fc21ece89fb8fd58d0406e4c301047f3
+# Source0-md5:	9c6452ed378eb8c8f808134a3bdcacaa
 URL:		http://burtonini.com/blog/computers/postr
 BuildRequires:	rpm-pythonprov
 %pyrequires_eq	python-libs
