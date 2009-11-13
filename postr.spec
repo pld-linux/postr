@@ -1,17 +1,22 @@
 Summary:	A Flickr photo uploader
 Summary(pl.UTF-8):	Narzędzie do umieszczania zdjęć na Flickr
 Name:		postr
-Version:	0.12.3
+Version:	0.12.4
 Release:	1
 License:	GPL v2+
 Group:		X11/Applications
-Source0:	http://burtonini.com/computing/%{name}-%{version}.tar.gz
-# Source0-md5:	9c6452ed378eb8c8f808134a3bdcacaa
-URL:		http://burtonini.com/blog/computers/postr
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/postr/0.12/%{name}-%{version}.tar.bz2
+# Source0-md5:	83031103239108bfedb1b99ae1091c19
+URL:		http://projects.gnome.org/postr/
 BuildRequires:	rpm-pythonprov
+Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk+2
+Requires:	hicolor-icon-theme
 %pyrequires_eq	python-libs
 Requires:	python-gnome-extras-egg
+Requires:	python-gnome-gconf
 Requires:	python-pygtk-gtk >= 2:2.0
+Requires:	python-pygtk-glade
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -52,12 +57,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %update_icon_cache hicolor
-
 %update_desktop_database_post
 
 %postun
 %update_icon_cache hicolor
-
 %update_desktop_database_postun
 
 %files
