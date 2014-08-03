@@ -1,0 +1,45 @@
+--- postr-0.12.3/setup.py	2008-12-19 15:51:01.000000000 +0100
++++ postr-0.12.3.new/setup.py	2009-08-25 15:44:58.123732748 +0200
+@@ -1,9 +1,30 @@
+ #!/usr/bin/env python
+ 
++import os
+ from distutils.core import setup
++from distutils.command.install_data import install_data
+ from glob import glob
+ from src.version import __version__
+ 
++
++class InstallData(install_data):
++    def run(self):
++        self.data_files.extend(self._nautilus_plugin())
++        install_data.run(self)
++    
++    def _nautilus_plugin(self):
++        files = []
++        cmd = os.popen('pkg-config --variable=pythondir nautilus-python', 'r')
++        res = cmd.readline().strip()
++        ret = cmd.close()
++            
++        if ret is None:
++           dest = res[5:]
++           files.append((dest, ['nautilus/postrExtension.py']))
++        
++        return files
++
++
+ setup(name='postr',
+       version=__version__,
+       description='Flickr Uploader',
+@@ -21,10 +42,7 @@
+                   ('share/icons/hicolor/24x24/apps', glob('data/24x24/*.png')),
+                   ('share/icons/hicolor/32x32/apps', glob('data/32x32/*.png')),
+                   ('share/icons/hicolor/scalable/apps', glob('data/scalable/*.svg')),
+-                  # TODO: inspect nautilus-python.pc to get path
+-                  ('lib/nautilus/extensions-1.0/python', ['nautilus/postrExtension.py']),
+-                  ('lib/nautilus/extensions-2.0/python', ['nautilus/postrExtension.py']),
+-                  ],
++                  ], cmdclass={'install_data': InstallData}
+       
+       )
+ 

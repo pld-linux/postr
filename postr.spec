@@ -2,12 +2,14 @@ Summary:	A Flickr photo uploader
 Summary(pl.UTF-8):	Narzędzie do umieszczania zdjęć na Flickr
 Name:		postr
 Version:	0.12.5
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/postr/0.12/%{name}-%{version}.tar.xz
 # Source0-md5:	e0e50fc64ba749cd4999015dc30c1ad9
+Patch0:		nautilus-ext-dir.patch
 URL:		http://projects.gnome.org/postr/
+BuildRequires:	nautilus-python
 BuildRequires:	rpm-pythonprov
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -43,6 +45,7 @@ To rozszerzenie pozwala wysyłać pliki na serwis Flickr z Nautilusa.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -50,12 +53,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py install \
 	--root=$RPM_BUILD_ROOT \
 	--optimize=2
-
-if [ "%{_libdir}" != "/usr/lib" ]; then
-	%{__mv} $RPM_BUILD_ROOT{/usr/lib,%{_libdir}}
-fi
-
-%{__rm} -r $RPM_BUILD_ROOT%{_libdir}/nautilus/extensions-1.0
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -79,4 +76,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n nautilus-extension-postr
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/nautilus/extensions-2.0/python/postrExtension.py
+%attr(755,root,root) %{_libdir}/nautilus/extensions-3.0/python/postrExtension.py
