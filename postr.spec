@@ -17,6 +17,7 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 %pyrequires_eq	python-libs
+Requires:	nautilus-python
 Requires:	python-gnome-extras-egg
 Requires:	python-gnome-gconf
 Requires:	python-pygtk-glade
