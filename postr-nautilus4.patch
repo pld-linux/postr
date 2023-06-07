@@ -1,0 +1,47 @@
+--- postr-0.12.5/nautilus/postrExtension.py.orig	2014-07-05 21:48:59.000000000 +0200
++++ postr-0.12.5/nautilus/postrExtension.py	2023-06-07 06:29:14.624623478 +0200
+@@ -18,18 +18,18 @@
+ import gettext
+ gettext.install('postr')
+ 
+-import gobject, nautilus
+ import os, os.path
++from gi.repository import Nautilus, GObject
+ from urllib import unquote
+ 
+ PROGRAM_NAME = 'postr'
+ 
+-class PostrExtension(nautilus.MenuProvider):
++class PostrExtension(GObject.GObject, Nautilus.MenuProvider):
+     def __init__(self):
+         # The constructor must be exists, even if there is nothing
+         # to initialize (See Bug #374958)
+         #self.program = None
+-        pass
++        super().__init__()
+     
+     def locate_program(self, program_name):
+         path_list = os.environ['PATH']
+@@ -58,7 +58,7 @@ class PostrExtension(nautilus.MenuProvid
+         # TODO: use startup notification
+         gobject.spawn_async(argv, flags=gobject.SPAWN_SEARCH_PATH)
+ 
+-    def get_file_items(self, window, files):
++    def get_file_items(self, files):
+         # Show the menu iif:
+         # - There is at least on file selected
+         # - All the selected files are images
+@@ -78,9 +78,9 @@ class PostrExtension(nautilus.MenuProvid
+         #if not self.program:
+         #    return
+ 
+-        item = nautilus.MenuItem('PostrExtension::upload_files',
+-                                 _('Upload to Flickr...'),
+-                                 _('Upload the selected files into Flickr'))
++        item = Nautilus.MenuItem(name='PostrExtension::upload_files',
++                                 label=_('Upload to Flickr...'),
++                                 tip=_('Upload the selected files into Flickr'))
+         item.connect('activate', self.upload_files, files)
+ 
+-        return item,
++        return [item]
