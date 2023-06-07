@@ -2,7 +2,7 @@ Summary:	A Flickr photo uploader
 Summary(pl.UTF-8):	Narzędzie do umieszczania zdjęć na Flickr
 Name:		postr
 Version:	0.12.5
-Release:	4
+Release:	5
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/postr/0.12/%{name}-%{version}.tar.xz
@@ -23,6 +23,7 @@ Requires:	python-gnome-gconf
 Requires:	python-pygtk-glade
 Requires:	python-pygtk-gtk >= 2:2.0
 Requires:	python-twisted
+BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
